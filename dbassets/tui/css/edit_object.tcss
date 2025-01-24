@@ -1,0 +1,7 @@
+Button {
+    margin: 1;
+}
+
+#edit_confirm {
+    align: center top;
+}
