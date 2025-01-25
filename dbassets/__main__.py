@@ -198,12 +198,8 @@ def parse_arguments() -> None:
     hosts_delete_parser.add_argument("--ip", required=True, help="Host IP.")
 
     # TUI
-    tui_parser = tui_subparsers.add_parser(
-        "creds", help="Manage credentials."
-    )
-    tui_parser = tui_subparsers.add_parser(
-        "hosts", help="Manage hosts."
-    )
+    tui_parser = tui_subparsers.add_parser("creds", help="Manage credentials.")
+    tui_parser = tui_subparsers.add_parser("hosts", help="Manage hosts.")
 
     return parser.parse_args()
 
@@ -275,7 +271,11 @@ def main():
                 print(format_into_csv(creds))
 
             if args.json:
-                print(format_into_json(creds))
+                print(
+                    format_into_json(
+                        creds, field_names=["username", "password", "hash", "domain"]
+                    )
+                )
 
             if args.txt:
                 print(format_into_txt(creds))
@@ -287,7 +287,7 @@ def main():
                 print(format_into_csv(hosts))
 
             if args.json:
-                print(format_into_json(hosts))
+                print(format_into_json(hosts, field_names=["ip", "hostname", "role"]))
 
             if args.txt:
                 print(format_into_txt(hosts))

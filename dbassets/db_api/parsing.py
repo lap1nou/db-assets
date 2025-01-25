@@ -115,12 +115,14 @@ def parse_creds_pypykatz_greppable(raw_text: str) -> []:
 
     for key, value in parsed_creds.items():
         parsed_creds2.append(
-            tuple([
-                value["username"],
-                value["password"],
-                value["hash"],
-                value["domain"],
-            ])
+            tuple(
+                [
+                    value["username"],
+                    value["password"],
+                    value["hash"],
+                    value["domain"],
+                ]
+            )
         )
 
     return parsed_creds2

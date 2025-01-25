@@ -12,7 +12,8 @@
     ],
     "scripts": {
       "dbassets": "poetry run python db-assets.py",
-      "test": "poetry run pytest"
+      "test": "poetry run pytest -v",
+      "format": "ruff format ."
     }
   }
 }

@@ -1,10 +1,10 @@
 import json
 
 
-def format_into_txt(objects):
+def format_into_txt(objects) -> str:
     output = ""
 
-    for object in objects[1:]:
+    for object in objects:
         for attribute in object:
             output += attribute
             output += "\n"
@@ -12,13 +12,13 @@ def format_into_txt(objects):
     return output
 
 
-def format_into_csv(objects):
+def format_into_csv(objects) -> str:
     output = ""
 
     for object in objects:
-        for attribute in object:
+        for i, attribute in enumerate(object):
             output += attribute
-            if attribute != object[-1]:
+            if i != (len(object) - 1):
                 output += ","
 
         output += "\n"
@@ -26,16 +26,15 @@ def format_into_csv(objects):
     return output
 
 
-def format_into_json(objects):
+def format_into_json(objects, field_names: [str]) -> str:
     output = []
-    columns_name = objects[0]
 
-    for object in objects[1:]:
+    for object in objects:
         tmp = dict()
         i = 0
 
         for attribute in object:
-            tmp[columns_name[i].lower()] = attribute
+            tmp[field_names[i].lower()] = attribute
             i += 1
 
         output.append(tmp)
