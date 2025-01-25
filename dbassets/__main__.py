@@ -58,7 +58,6 @@ def load_config() -> dict[str, Any]:
     )
 
     if not os.path.isfile(config_path):
-        print(f"[[bold blue]*[/bold blue]] Creating config file at {config_path}...")
         os.makedirs(os.path.dirname(config_path), exist_ok=True)
 
         default_config_path = os.path.join(
@@ -222,7 +221,6 @@ def main():
     )
 
     if not os.path.isfile(db_path):
-        print(f"[[bold blue]*[/bold blue]] Creating Keepass database at {db_path}...")
         os.makedirs(os.path.dirname(db_path), exist_ok=True)
         setup(db_path, db_key_path)
 
