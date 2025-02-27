@@ -9,6 +9,7 @@ from dbassets.connectors.nxc.extractors.ldap import NXC_LDAP_Extractor
 from dbassets.connectors.nxc.extractors.rdp import NXC_RDP_Extractor
 from dbassets.connectors.nxc.extractors.nfs import NXC_NFS_Extractor
 from dbassets.connectors.nxc.extractors.vnc import NXC_VNC_Extractor
+from dbassets.connectors.nxc.extractors.wmi import NXC_WMI_Extractor
 
 class NXCWorkspaceSyncer:
     def __init__(self, kp, workspaces_dir='~/.nxc/workspaces/'):
@@ -23,12 +24,9 @@ class NXCWorkspaceSyncer:
             'ldap.db': NXC_LDAP_Extractor,
             'rdp.db': NXC_RDP_Extractor,
             'nfs.db': NXC_NFS_Extractor,
-            'vnc.db': NXC_VNC_Extractor
+            'vnc.db': NXC_VNC_Extractor,
+            'wmi.db': NXC_WMI_Extractor,
         }
-        # self.db_files = [
-        #     
-        #     'vnc.db', 'wmi.db'
-        # ]
 
     def sync(self):
         if os.path.exists(self.workspaces_dir):
