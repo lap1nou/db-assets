@@ -27,7 +27,7 @@ class NXC_SMB_Extractor:
                     add_credential(self.kp, username=username, hash=password, domain=domain)
                     counter = counter + 1
             
-            print(f"Synced {counter} credentials")
+            print(f"Synced {counter} SMB credentials")
 
             conn.close()
         except Exception as e:
