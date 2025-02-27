@@ -6,6 +6,7 @@ from dbassets.connectors.nxc.extractors.mssql import NXC_MSSQL_Extractor
 from dbassets.connectors.nxc.extractors.ssh import NXC_SSH_Extractor
 from dbassets.connectors.nxc.extractors.winrm import NXC_WINRM_Extractor
 from dbassets.connectors.nxc.extractors.ldap import NXC_LDAP_Extractor
+from dbassets.connectors.nxc.extractors.rdp import NXC_RDP_Extractor
 
 class NXCWorkspaceSyncer:
     def __init__(self, kp, workspaces_dir='~/.nxc/workspaces/'):
@@ -17,10 +18,11 @@ class NXCWorkspaceSyncer:
             'mssql.db': NXC_MSSQL_Extractor,
             'ssh.db': NXC_SSH_Extractor,
             'winrm.db': NXC_WINRM_Extractor,
-            'ldap.db': NXC_LDAP_Extractor
+            'ldap.db': NXC_LDAP_Extractor,
+            'rdp.db': NXC_RDP_Extractor
         }
         # self.db_files = [
-        #     'nfs.db', 'rdp.db',
+        #     'nfs.db',
         #     'vnc.db', 'wmi.db'
         # ]
 
