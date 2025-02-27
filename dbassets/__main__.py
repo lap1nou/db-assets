@@ -157,7 +157,7 @@ def parse_arguments() -> None:
         "-u", "--username", help="Specific username to get credential of."
     )
     credential_get_parser.add_argument(
-        "-r", "--redacted", help="Hide sensitive credentials"
+        "-r", "--redacted", action="store_true", help="Hide sensitive credentials"
     )
 
     # Delete

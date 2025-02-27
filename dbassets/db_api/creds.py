@@ -25,7 +25,7 @@ def add_credential(
 
 
 def get_credentials(
-    kp: PyKeePass, redacted: bool, searched_username: str = ""
+    kp: PyKeePass, searched_username: str = "", redacted: bool = "false"
 ) -> [(str, str, str, str)]:
     array = []
     group = kp.find_groups(name=GROUP_NAME_CREDENTIALS, first=True)
