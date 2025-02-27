@@ -1,7 +1,7 @@
 # 📂 DBAssets
-DBAssets is a tool to quickly store and retrieve compromised credentials / hosts, the goal is to ease the management of credentials / hosts during a penetration testing engagment or a CTF.
+DBAssets is a tool to quickly store and retrieve compromised credentials and hosts; the goal is to ease the management of credentials and hosts during a penetration testing engagement or a CTF.
 
-Once an asset is selected from the TUI, the informations can be accessed through environnment variable and don't need to be typed over and over.
+Once an asset is selected from the TUI, the information can be accessed through environment variables and doesn't need to be typed over and over.
 
 For CLI usage, see [Wiki](WIKI.md)
 
@@ -10,7 +10,7 @@ For CLI usage, see [Wiki](WIKI.md)
 pipx install git+https://github.com/lap1nou/db-assets
 ```
 
-You can then add those two shell alias in your shell configuration file (`.bashrc`, `.zshrc`, ...):
+You can then add these two shell aliases in your shell configuration file (`.bashrc`, `.zshrc`, ...):
 ```bash
 alias dbcreds='(){
 	CREDS=$(dbassets tui creds);
