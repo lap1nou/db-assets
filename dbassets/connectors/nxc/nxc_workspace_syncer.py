@@ -1,31 +1,23 @@
 import os
 from dbassets.db_api.creds import add_credential
-from dbassets.connectors.nxc.extractors.smb import NXC_SMB_Extractor
-from dbassets.connectors.nxc.extractors.ftp import NXC_FTP_Extractor
-from dbassets.connectors.nxc.extractors.mssql import NXC_MSSQL_Extractor
-from dbassets.connectors.nxc.extractors.ssh import NXC_SSH_Extractor
-from dbassets.connectors.nxc.extractors.winrm import NXC_WINRM_Extractor
-from dbassets.connectors.nxc.extractors.ldap import NXC_LDAP_Extractor
-from dbassets.connectors.nxc.extractors.rdp import NXC_RDP_Extractor
-from dbassets.connectors.nxc.extractors.nfs import NXC_NFS_Extractor
-from dbassets.connectors.nxc.extractors.vnc import NXC_VNC_Extractor
-from dbassets.connectors.nxc.extractors.wmi import NXC_WMI_Extractor
+from dbassets.connectors.nxc.extractors.credentials import NXC_Credentials_Extractor
+from dbassets.connectors.nxc.extractors.users import NXC_Users_Extractor
 
 class NXCWorkspaceSyncer:
     def __init__(self, kp, workspaces_dir='~/.nxc/workspaces/'):
         self.workspaces_dir = os.path.expanduser(workspaces_dir)
         self.kp = kp
         self.db_files = {
-            'smb.db': NXC_SMB_Extractor,
-            'ftp.db': NXC_FTP_Extractor,
-            'mssql.db': NXC_MSSQL_Extractor,
-            'ssh.db': NXC_SSH_Extractor,
-            'winrm.db': NXC_WINRM_Extractor,
-            'ldap.db': NXC_LDAP_Extractor,
-            'rdp.db': NXC_RDP_Extractor,
-            'nfs.db': NXC_NFS_Extractor,
-            'vnc.db': NXC_VNC_Extractor,
-            'wmi.db': NXC_WMI_Extractor,
+            'smb.db': NXC_Users_Extractor,
+            'ftp.db': NXC_Credentials_Extractor,
+            'mssql.db': NXC_Users_Extractor,
+            'ssh.db': NXC_Credentials_Extractor,
+            'winrm.db': NXC_Users_Extractor,
+            'ldap.db': NXC_Credentials_Extractor,
+            'rdp.db': NXC_Credentials_Extractor,
+            'nfs.db': NXC_Credentials_Extractor,
+            'vnc.db': NXC_Credentials_Extractor,
+            'wmi.db': NXC_Credentials_Extractor,
         }
 
     def sync(self):
@@ -40,8 +32,9 @@ class NXCWorkspaceSyncer:
     def process_workspace(self, workspace_path):
         for db_file, extractor_class in self.db_files.items():
             db_file_path = os.path.join(workspace_path, db_file)
+            service_name = db_file.split('.')[0]
             if os.path.isfile(db_file_path):
-                extractor = extractor_class(db_file_path, self.kp)
+                extractor = extractor_class(db_file_path, self.kp, service_name)
                 extractor.extract_and_add_credentials()
             else:
                 print(f'Missing: {db_file}')

@@ -1,10 +1,11 @@
 import sqlite3
 from dbassets.db_api.creds import add_credential
 
-class NXC_SMB_Extractor:
-    def __init__(self, db_file_path, kp):
+class NXC_Users_Extractor:
+    def __init__(self, db_file_path, kp, service_name):
         self.db_file_path = db_file_path
         self.kp = kp
+        self.service_name = service_name
 
     def extract_and_add_credentials(self):
         try:
@@ -27,7 +28,7 @@ class NXC_SMB_Extractor:
                     add_credential(self.kp, username=username, hash=password, domain=domain)
                     counter = counter + 1
             
-            print(f"Synced {counter} SMB credentials")
+            print(f"Synced {counter} {self.service_name} credentials")
 
             conn.close()
         except Exception as e:
