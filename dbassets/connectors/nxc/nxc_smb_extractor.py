@@ -22,6 +22,8 @@ class NXC_SMB_Extractor:
                     add_credential(self.kp, username=username, password=password, domain=domain)
                     counter = counter + 1
                 elif credtype == 'hash':
+                    if ':' in password:
+                        password = password.split(':')[1]
                     add_credential(self.kp, username=username, hash=password, domain=domain)
                     counter = counter + 1
             
