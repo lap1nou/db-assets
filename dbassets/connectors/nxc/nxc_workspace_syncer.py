@@ -3,6 +3,7 @@ from dbassets.db_api.creds import add_credential
 from dbassets.connectors.nxc.extractors.smb import NXC_SMB_Extractor
 from dbassets.connectors.nxc.extractors.ftp import NXC_FTP_Extractor
 from dbassets.connectors.nxc.extractors.mssql import NXC_MSSQL_Extractor
+from dbassets.connectors.nxc.extractors.ssh import NXC_SSH_Extractor
 
 class NXCWorkspaceSyncer:
     def __init__(self, kp, workspaces_dir='~/.nxc/workspaces/'):
@@ -11,7 +12,8 @@ class NXCWorkspaceSyncer:
         self.db_files = {
             'smb.db': NXC_SMB_Extractor,
             'ftp.db': NXC_FTP_Extractor,
-            'mssql.db': NXC_MSSQL_Extractor
+            'mssql.db': NXC_MSSQL_Extractor,
+            'ssh.db': NXC_SSH_Extractor
         }
         # self.db_files = [
         #     'ldap.db', 'nfs.db', 'rdp.db',
