@@ -1,4 +1,4 @@
-from textual.screen import Screen
+from textual.screen import ModalScreen
 from textual.app import ComposeResult
 from textual.widgets import Button, Input
 from textual.containers import Vertical, Horizontal
@@ -8,7 +8,7 @@ This screen is used to edit credentials informations such as the username, passw
 """
 
 
-class EditCredentialScreen(Screen):
+class EditCredentialScreen(ModalScreen):
     CSS_PATH = "../css/edit_object.tcss"
 
     def __init__(self, username: str, password: str, hash: str, domain: str):

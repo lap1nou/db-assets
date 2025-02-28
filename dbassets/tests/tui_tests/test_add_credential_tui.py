@@ -189,3 +189,22 @@ async def test_add_credential_existing_tui(
     assert credentials == [
         (USERNAME_TEST_VALUE, PASSWORD_TEST_VALUE, HASH_TEST_VALUE, DOMAIN_TEST_VALUE)
     ]
+
+
+@pytest.mark.asyncio
+async def test_add_credential_issue_3(
+    open_keepass: PyKeePass, load_mock_config: dict[str, Any]
+):
+    config = load_mock_config
+    kp = open_keepass
+    app = DbCredsApp(config, kp)
+
+    async with app.run_test() as pilot:
+        await pilot.press("f4")
+        await pilot.press("f4")
+        await select_input_and_enter_text(pilot, "#username", USERNAME_TEST_VALUE)
+        await pilot.click("#confirm_add")
+
+    credentials = get_credentials(kp)
+
+    assert credentials == [(USERNAME_TEST_VALUE, "", "", "")]

@@ -79,3 +79,17 @@ async def test_delete_host_not_exist_tui(
     hosts = get_hosts(kp)
 
     assert len(hosts) == 0
+
+
+@pytest.mark.asyncio
+async def test_delete_host_tui_issue_3(
+    open_keepass: PyKeePass, load_mock_config: dict[str, Any]
+):
+    config = load_mock_config
+    kp = open_keepass
+    app = DbHostsApp(config, kp)
+
+    async with app.run_test() as pilot:
+        await pilot.press("f4")
+        await pilot.press("f4")
+        await pilot.click("#confirm")

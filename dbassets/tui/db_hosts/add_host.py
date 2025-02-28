@@ -1,5 +1,5 @@
 from textual import on
-from textual.screen import Screen
+from textual.screen import ModalScreen
 from textual.app import ComposeResult
 from textual.widgets import (
     Select,
@@ -20,7 +20,7 @@ This screen is used to add a host
 """
 
 
-class AddHostScreen(Screen):
+class AddHostScreen(ModalScreen):
     CSS_PATH = "../css/add_object.tcss"
 
     selected_format = 0

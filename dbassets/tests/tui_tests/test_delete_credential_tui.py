@@ -83,3 +83,15 @@ async def test_delete_credential_not_exist_tui(
     credentials = get_credentials(kp)
 
     assert len(credentials) == 0
+
+
+@pytest.mark.asyncio
+async def test_delete_credential_tui_issue_3(open_keepass: PyKeePass, load_mock_config):
+    config = load_mock_config
+    kp = open_keepass
+    app = DbCredsApp(config, kp)
+
+    async with app.run_test() as pilot:
+        await pilot.press("f5")
+        await pilot.press("f5")
+        await pilot.click("#confirm")

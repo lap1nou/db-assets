@@ -1,4 +1,4 @@
-from textual.screen import Screen
+from textual.screen import ModalScreen
 from textual.app import ComposeResult
 from textual.widgets import Button, Label
 from textual.containers import Horizontal, Vertical, Container
@@ -8,7 +8,7 @@ This screen is used to delete the selected host
 """
 
 
-class DeleteHostConfirmationScreen(Screen):
+class DeleteHostConfirmationScreen(ModalScreen):
     CSS_PATH = "../css/delete_object.tcss"
 
     def compose(self) -> ComposeResult:
