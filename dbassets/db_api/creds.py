@@ -13,6 +13,15 @@ def add_credential(
 
     group = kp.find_groups(name=GROUP_NAME_CREDENTIALS, first=True)
 
+    existing_entries = get_credentials(kp, searched_username=username)
+
+    for entry in existing_entries:
+        _, existing_password, existing_hash, existing_domain = entry
+        if existing_hash and hash and existing_hash == hash:
+            return
+        if existing_password and password and existing_password == password:
+            return
+
     try:
         entry = kp.add_entry(group, username, username, password)
         entry.set_custom_property(EXEGOL_DB_HASH_PROPERTY, hash, protect=True)
@@ -89,8 +98,10 @@ def edit_credential(
         entry = kp.find_entries(title=old_username, first=True, group=group)
         entry.title = username
         entry.username = username
-        entry.password = password
-        entry.set_custom_property(EXEGOL_DB_HASH_PROPERTY, hash, protect=True)
+        if password and not entry.password:
+            entry.password = password
+        if hash and not entry.get_custom_property(EXEGOL_DB_HASH_PROPERTY):
+            entry.set_custom_property(EXEGOL_DB_HASH_PROPERTY, hash, protect=True)
         entry.set_custom_property(EXEGOL_DB_DOMAIN_PROPERTY, domain, protect=True)
     except Exception:
         pass

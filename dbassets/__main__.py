@@ -25,6 +25,7 @@ from dbassets.db_api.parsing import (
     CredsFileType,
     HostsFileType,
 )
+from dbassets.connectors.nxc.nxc_workspace_syncer import NXCWorkspaceSyncer
 
 DBASSETS_HOME_FOLDER_NAME = ".dbassets"
 
@@ -98,7 +99,18 @@ def parse_arguments() -> None:
 			Launch the TUI to manage an object (credentials, hosts, ...).
 		""",
     )
+    nxc_parser = subparsers.add_parser(
+        "nxc",
+        help="""
+			TODO.
+		""",
+    )
 
+    nxc_subparsers = nxc_parser.add_subparsers(
+            dest="subcommand",
+            required=True,
+            help="TODO",
+        )
     add_subparsers = add_parser.add_subparsers(
         dest="subcommand",
         required=True,
@@ -203,6 +215,10 @@ def parse_arguments() -> None:
     # TUI
     tui_parser = tui_subparsers.add_parser("creds", help="Manage credentials.")
     tui_parser = tui_subparsers.add_parser("hosts", help="Manage hosts.")
+
+    # NXC
+    nxc_parser = nxc_subparsers.add_parser("sync", help="Sync with nxc")
+    nxc_parser.add_argument("-w", "--workspace", help="Workspace.")
 
     return parser.parse_args()
 
@@ -325,3 +341,9 @@ def main():
                 print(f"{hosts[0]}\n{hosts[1]}\n{hosts[2]}")
             except Exception:
                 pass
+
+    # NXC mode
+    if args.command == "nxc":
+        if args.subcommand == "sync":
+            syncer = NXCWorkspaceSyncer(kp)
+            syncer.sync()
